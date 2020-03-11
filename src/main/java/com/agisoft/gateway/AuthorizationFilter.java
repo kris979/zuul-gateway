@@ -1,6 +1,7 @@
 package com.agisoft.gateway;
 
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Slf4j
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
     public AuthorizationFilter(AuthenticationManager authenticationManager) {
-
         super(authenticationManager);
     }
 
@@ -25,6 +26,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader == null) {
+            log.info("Authorization header: {}", authorizationHeader);
             chain.doFilter(request, response);
             return;
         }
@@ -36,14 +38,15 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
-
+        log.info("Authorization header: {}", authorizationHeader);
         if (authorizationHeader == null) {
             return null;
         }
 
         String token = authorizationHeader.replace("Bearer ", "");
-
         String userId = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody().getSubject();
+
+        log.info("UserId: {}, token: {}",userId, token);
 
         return new UsernamePasswordAuthenticationToken(userId, null, new ArrayList<>());
     }
