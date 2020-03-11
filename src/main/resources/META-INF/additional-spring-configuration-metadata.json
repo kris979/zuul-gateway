@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "ribon.eureka.enabled",
+      "type": "java.lang.String",
+      "description": "Description for ribon.eureka.enabled."
+    },
+    {
+      "name": "marklogic.ribbon.listOfServers",
+      "type": "java.lang.String",
+      "description": "Description for marklogic.ribbon.listOfServers."
+    }
+  ] }

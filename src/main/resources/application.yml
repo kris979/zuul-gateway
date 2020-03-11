@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: zuul-gateway
+
+server:
+  port: 8090
+
+zuul:
+  routes:
+    marklogic:
+      path: /marklogic/**
+      serviceId: marklogic
+      strip-prefix: true
+
+ribon:
+  eureka:
+    enabled: false
+
+marklogic:
+  ribbon:
+    listOfServers: localhost:8080
+
+
