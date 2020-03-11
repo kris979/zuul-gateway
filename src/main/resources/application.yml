@@ -11,6 +11,10 @@ zuul:
       path: /marklogic/**
       serviceId: marklogic
       strip-prefix: true
+    graphQL:
+      path: /graphql/**
+      serviceId: graphQL
+      strip-prefix: true
 
 ribon:
   eureka:
@@ -19,5 +23,9 @@ ribon:
 marklogic:
   ribbon:
     listOfServers: localhost:8080
+
+graphQL:
+  ribbon:
+    listOfServers: localhost:8081
 
 

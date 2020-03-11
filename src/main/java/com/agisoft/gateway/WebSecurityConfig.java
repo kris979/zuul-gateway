@@ -24,8 +24,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/marklogic/**").authenticated()
-            .antMatchers(HttpMethod.GET, "/**").permitAll();
+        http.authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/marklogic/**").authenticated()
+            .antMatchers(HttpMethod.GET, "/graphql/**").authenticated()
+            .antMatchers(HttpMethod.GET, "/**").permitAll()
+            .and()
+            .addFilter(new AuthorizationFilter(authenticationManager()));
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }
