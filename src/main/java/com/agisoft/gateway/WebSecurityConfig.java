@@ -21,6 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
             .antMatchers(HttpMethod.GET, "/marklogic/**").authenticated()
+            .antMatchers(HttpMethod.GET, "/graphql/graphiql/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/graphql/hello").permitAll()
             .antMatchers(HttpMethod.GET, "/graphql/**").authenticated()
             .antMatchers(HttpMethod.GET, "/**").permitAll()
             .and()

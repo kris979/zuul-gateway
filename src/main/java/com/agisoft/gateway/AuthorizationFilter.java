@@ -26,7 +26,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader == null) {
-            log.info("Authorization header: {}", authorizationHeader);
+            log.info("Authorization header is missing");
             chain.doFilter(request, response);
             return;
         }
