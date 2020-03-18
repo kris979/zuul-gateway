@@ -29,3 +29,10 @@ graphQL:
     listOfServers: localhost:8081
 
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans, health, routes, httptrace
+
+prop: dupa-dupowata
